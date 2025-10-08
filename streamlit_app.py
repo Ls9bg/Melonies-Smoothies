@@ -17,7 +17,7 @@ st.write(
 name_on_order = st.text_input("Name on Smoothie")
 st.write("The name on your smoothie will be", name_on_order)
 
-st.stop()
+
 cnx=st.connection("snowflake")
 session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'),col('SEARCH_ON'))
@@ -28,7 +28,7 @@ ingredients_list=st.multiselect(
     ,my_dataframe
     ,max_selections=5
 )
-
+st.stop()
 
 if ingredients_list:
     ingredients_string= ''
