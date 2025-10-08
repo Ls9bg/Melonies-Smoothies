@@ -34,5 +34,20 @@ if ingredients_list:
     ingredients_string= ''
     for fruit_chosen in ingredients_list:
       ingredients_string +=fruit_chosen +' '
-      search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
-      st.write ('The search value for ',fruit_chosen,' is ' ,search_on,'.')
+      #search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
+      #st.write ('The search value for ',fruit_chosen,' is ' ,search_on,'.')
+      st.subheader(fruit_chosen+' Nutrition Information')
+      
+      smoothiefroot_response=requests.get("https://SmoothieFroot.com/api/fruit/fruit_chosen/fruit_chosen")
+      #{search_on}
+    my_insert_statement = """ insert into smoothies.public.orders(ingredients,name_on_order)
+            values ('""" + ingredients_string + """','"""+ name_on_order + """')"""
+        
+    if ingredients_string:
+      st.write(my_insert_stmt)
+    #st.stop()
+    time_to_insert=st.button('Submit Order')
+    
+    if time_to_insert:
+      session.sql(my_insert_stmt).collect()
+      st.success('Your Smoothie is ordered!'+name_on_order, icon="✅")
