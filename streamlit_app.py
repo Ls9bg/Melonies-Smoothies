@@ -40,7 +40,7 @@ if ingredients_list:
       
       smoothiefroot_response=requests.get("https://SmoothieFroot.com/api/fruit/fruit_chosen/fruit_chosen")
       #{search_on}
-    my_insert_statement = """ insert into smoothies.public.orders(ingredients,name_on_order)
+      my_insert_statement = """ insert into smoothies.public.orders(ingredients,name_on_order)
             values ('""" + ingredients_string + """','"""+ name_on_order + """')"""
         
     if ingredients_string:
